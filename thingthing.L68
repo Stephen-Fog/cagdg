@@ -1,0 +1,106 @@
+00001000 Starting Address
+Assembler used: EASy68K Editor/Assembler v5.16.01
+Created On: 18/01/2022 10:51:00
+
+00000000                             1  *-----------------------------------------------------------
+00000000                             2  * Title      :Practical     8
+00000000                             3  
+00000000                             4  * Written by :Stephen   Fogarty
+00000000                             5  * Date       :18/01/2022
+00000000                             6  * Description:Stuff and things
+00000000                             7  *-----------------------------------------------------------
+00001000                             8      ORG    $1000
+00001000                             9  
+00001000                            10      
+00001000                            11  START:                  ; first instruction of program
+00001000                            12  
+00001000                            13  * Put program code here
+00001000                            14  
+00001000                            15  
+00001000                            16      *move.b  (a1)+, (a2)+
+00001000                            17      *add.B #3, D3
+00001000                            18       
+00001000  43F9 0000109A             19       LEA NEXTLINE,A1
+00001006  103C 000E                 20       MOVE.B  #14,D0
+0000100A  4E4F                      21       TRAP    #15
+0000100C                            22       
+0000100C  43F9 00001084             23       LEA text, A1
+00001012  303C 0004                 24       MOVE #4,D0
+00001016  4E4F                      25       TRAP #15
+00001018  303C 000E                 26       MOVE #14,D0
+0000101C  4E4F                      27       TRAP #15
+0000101E  303C 0003                 28       MOVE #3,D0
+00001022  4E4F                      29       TRAP #15
+00001024                            30       
+00001024  13C1 000010CC             31       MOVE.B D1,HITPOINTS
+0000102A  1839 000010CC             32       MOVE.B HITPOINTS,D4
+00001030                            33       
+00001030                            34       
+00001030                            35       
+00001030                            36  l3:
+00001030  43F9 000010AC             37       LEA guess,A1
+00001036  103C 000E                 38       MOVE.B #14,D0
+0000103A  4E4F                      39       TRAP #15
+0000103C                            40       
+0000103C  303C 0004                 41       MOVE #4,D0
+00001040  4E4F                      42       TRAP #15
+00001042  303C 000E                 43       MOVE #14,D0
+00001046  4E4F                      44       TRAP #15
+00001048  303C 0003                 45       MOVE #3,D0
+0000104C  4E4F                      46       TRAP #15
+0000104E                            47       
+0000104E  13C1 000010D0             48       MOVE.B D1,guessNumber
+00001054  1839 000010D0             49       MOVE.B guessNumber  ,D4
+0000105A                            50       
+0000105A                            51       
+0000105A  BC85                      52       CMP.L D5,D6
+0000105C  4EF9 00001078             53       jmp l1
+00001062  43F9 000010C0             54       LEA WRONG,A1
+00001068  103C 000E                 55       MOVE.B  #14,D0
+0000106C  4E4F                      56       TRAP    #15
+0000106E  143C 000F                 57       MOVE.B #15, D2
+00001072  4EF9 00001080             58       jmp l2
+00001078                            59  
+00001078                            60  
+00001078                            61  
+00001078                            62  
+00001078  143C 0000                 63  l1: MOVE.B #0, D2
+0000107C                            64      
+0000107C  4EF8 1030                 65       jmp l3 LOOOP
+00001080                            66  l2:
+00001080  FFFF FFFF                 67      SIMHALT             ; halt simulator
+00001084= 0D 0A                     68  text dc.b $0D,$0A
+00001086= 48 49 54 50 4F 49 ...     69       dc.b 'HITPOINTS ARE NOW: ',0
+0000109A= 45 4E 54 45 52 20 ...     70  NEXTLINE dc.b 'ENTER HITPIONTS: ',0
+000010AC= 47 75 65 73 73 20 ...     71  guess dc.b 'Guess a NuMbEr!: '
+000010BD= 0D 0A 00                  72        dc.b $0D,$0A,0
+000010C0= 57 52 4F 4E 47 21 ...     73  WRONG dc.b 'WRONG!!!'
+000010C8= 0D 0A 00                  74        dc.b $0D,$0A,0
+000010CB                            75       
+000010CB                            76       
+000010CC                            77  HITPOINTS:     DS.W    1
+000010CE                            78  NUMBER:     DS.W    1
+000010D0                            79  guessNumber    DS.W    100
+00001198                            80  
+00001198                            81  * Put variables and constants here
+00001198                            82  
+00001198                            83      END    START        ; last line of source
+
+No errors detected
+No warnings generated
+
+
+SYMBOL TABLE INFORMATION
+Symbol-name         Value
+-------------------------
+GUESS               10AC
+GUESSNUMBER         10D0
+HITPOINTS           10CC
+L1                  1078
+L2                  1080
+L3                  1030
+NEXTLINE            109A
+NUMBER              10CE
+START               1000
+TEXT                1084
+WRONG               10C0
